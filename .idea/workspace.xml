@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a9aa93f-c8b9-4531-8fc8-cf21a0e7a84b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/bo/FragenBO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/LernApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Frage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data/FragenBO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LernApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LernApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bo/FragenBO.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +40,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunManager">
     <configuration name="LernApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -74,6 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1580242078237</updated>
       <workItem from="1580242079795" duration="1171000" />
+      <workItem from="1580244326286" duration="521000" />
     </task>
     <task id="LOCAL-00001" summary="Innitialer Commit für das gewünschte .gitignore und die Grundbausteine des Projektes">
       <created>1580242375585</created>
@@ -117,5 +118,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1372" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580243266860" />
+    <state x="712" y="163" key="SettingsEditor" timestamp="1580244574253">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="712" y="163" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1580244574253" />
   </component>
 </project>
