@@ -5,8 +5,7 @@ import model.Frage;
 import java.util.Collections;
 import java.util.List;
 
-public class FragenBO {
-
+public class DataSource {
 
     public List<Frage> getFragenliste(){
         //TODO Method STUB
