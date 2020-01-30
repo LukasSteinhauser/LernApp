@@ -6,15 +6,21 @@ import java.io.*;
 import java.util.Optional;
 
 public class XMLData {
-private static String basicPath = System.getenv("APPDATA")+ File.pathSeparator
-         +"LernApp"+File.pathSeparator+"Data";
+private static String basicPath = System.getenv("APPDATA")+ File.separator
+         +"LernApp"+File.separator+"Data";
+
     public static boolean saveToDisk(String fileName, Object toSave){
         XMLEncoder encoder =null;
-        String path = basicPath+File.pathSeparator+fileName;
+        String path = basicPath+File.separator+fileName;
         try{
-            encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(path)));
+            File file = new File(path);
+
+            file.getParentFile().mkdirs();
+
+            encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(file)));
         }catch(FileNotFoundException fileNotFound){
-return false;
+            return false;
+
         }
         encoder.writeObject(toSave);
         encoder.close();
@@ -22,7 +28,7 @@ return false;
     }
     public static <T> Optional<T> loadFromDisk(Class<T> type, String fileName){
         XMLDecoder decoder=null;
-        String path = basicPath+File.pathSeparator+fileName;
+        String path = basicPath+File.separator+fileName;
         try {
             decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
         } catch (FileNotFoundException e) {
