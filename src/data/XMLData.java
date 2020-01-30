@@ -9,6 +9,11 @@ public class XMLData {
 private static String basicPath = System.getenv("APPDATA")+ File.separator
          +"LernApp"+File.separator+"Data";
 
+    /**Verwendet dies um Objekte auf der Festplatte zu speichern. Dabei nur den Dateinamen angeben (nicht den ganzen Pfad)
+     * fileName: name der Datei am besten der Name des Objektes
+     *
+     * Das Objekt, dass gespeichert wird. Am besten nur Thema-Objekte speichern.
+     */
     public static boolean saveToDisk(String fileName, Object toSave){
         XMLEncoder encoder =null;
         String path = basicPath+File.separator+fileName;
@@ -26,6 +31,18 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
         encoder.close();
         return true;
     }
+
+    /**Verwenden um gespeicherte Objekte im Programm wieder her zu stellen.
+     *
+     * type: typ angeben
+     *
+     * fileName: gleichen Dateinamen wie oben angeben
+     *
+     * Beispiel für die Wiederherstellung eines Objektes vom Typ String,
+     * welcher in der Datei "mystring.xml" gespeichert wurde:
+     *
+     * String mystring = XMLData.loadFromDisk(String.class, "mystring.xml");
+     */
     public static <T> Optional<T> loadFromDisk(Class<T> type, String fileName){
         XMLDecoder decoder=null;
         String path = basicPath+File.separator+fileName;
