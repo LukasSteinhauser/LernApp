@@ -52,7 +52,7 @@ public class LernApp {
                 while (true){
                     System.out.println("wie viele Fragen sollen zu dem Thema beantwortet werden ?");
                     fragenAnzahl = scanner.nextInt();
-                    if (fragenAnzahl >10) {   System.out.println("Fragenanzahl darf nicht mehr als 10 sein");
+                    if (fragenAnzahl >kategorien.get(gewaehlteZahl).size()) {   System.out.println("Fragenanzahl darf nicht mehr als "+kategorien.get(gewaehlteZahl).size()+" sein");
 
                     }
                     else {
