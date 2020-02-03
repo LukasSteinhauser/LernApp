@@ -1,4 +1,4 @@
-package main;
+package model;
 import java.util.ArrayList;
 
 public class Category extends ArrayList<Question> {

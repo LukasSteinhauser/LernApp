@@ -1,5 +1,8 @@
 package main;
 
+import model.Category;
+import model.Question;
+
 import java.util.Scanner;
 
 public class LernApp {
