@@ -47,9 +47,22 @@ public class LernApp {
 
                 Collections.shuffle(gewaehlteKategorie);
 
-                System.out.println("wie viele Fragen sollen zu dem Thema beantwortet werden ?");
+                int fragenAnzahl;
                 Scanner scanner = new Scanner(System.in);
-                int fragenAnzahl = scanner.nextInt();
+                while (true){
+                    System.out.println("wie viele Fragen sollen zu dem Thema beantwortet werden ?");
+                    fragenAnzahl = scanner.nextInt();
+                    if (fragenAnzahl >10) {   System.out.println("Fragenanzahl darf nicht mehr als 10 sein");
+
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+
+
+
 
 
                 for (Question question: gewaehlteKategorie.subList(0,fragenAnzahl)) {
