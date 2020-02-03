@@ -40,5 +40,6 @@ public class LernApp {
         if (anwort.equals(englisch.get(0).getAntwort())){ score++; }
         else {  System.out.println ("Falsch,das richtige antwort wäre " +englisch.get(0).getAntwort()); }
 
+
     }
 }
