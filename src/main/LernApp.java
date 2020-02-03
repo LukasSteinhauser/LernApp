@@ -54,10 +54,25 @@ public class LernApp {
         for(int i = 0; i<kategorien.size();++i){
             System.out.println(i+": "+kategorien.get(i).getName());
         }
+        System.out.println("Exit: Programm beenden");
         while(true){
-            var eingabe = scanner.nextInt();
-            if(kategorien.size()>=eingabe+1){
-                for (Question question: kategorien.get(eingabe)) {
+
+            System.out.print("Thema Nr: ");
+            var eingabe = scanner.nextLine();
+            int gewaehlteZahl = -2;
+
+            if("exit".equals(eingabe.toLowerCase())){
+                System.out.println("Auf wiedersehen ^^");
+                break;
+            }
+
+            try{
+                gewaehlteZahl = Integer.parseInt(eingabe);
+            }catch(NumberFormatException ex){
+
+            }
+            if(kategorien.size()>=gewaehlteZahl+1){
+                for (Question question: kategorien.get(gewaehlteZahl)) {
                     simpleQuestion(question);
                 }
             }else{
