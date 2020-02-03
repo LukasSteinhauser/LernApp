@@ -1,13 +1,11 @@
 package main;
 
 import data.TestData;
+import data.XMLData;
 import model.Category;
 import model.Question;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class LernApp {
     private static Scanner scanner = new Scanner(System.in);
@@ -43,7 +41,8 @@ public class LernApp {
             }
             if(kategorien.size()>=gewaehlteZahl+1){
                 var richtigeAntworten = 0;
-                ArrayList<Question> gewaehlteKategorie = kategorien.get(gewaehlteZahl);
+                Category gewaehlteKategorie = kategorien.get(gewaehlteZahl);
+
                 Collections.shuffle(gewaehlteKategorie);
 
                 for (Question question: gewaehlteKategorie) {

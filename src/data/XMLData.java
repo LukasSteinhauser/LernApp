@@ -1,5 +1,7 @@
 package data;
 // testPush
+import model.Category;
+
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
@@ -16,20 +18,25 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
      */
     public static boolean saveDataFileToDisk(String fileName, Object toSave){
         XMLEncoder encoder =null;
-        String path = basicPath+File.separator+fileName;
+        String path = basicPath+File.separator+fileName+".xml";
+
         try{
             File file = new File(path);
 
             file.getParentFile().mkdirs();
 
             encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(file)));
-        }catch(FileNotFoundException fileNotFound){
+        }catch(IOException fileNotFound){
             return false;
 
         }
         encoder.writeObject(toSave);
         encoder.close();
         return true;
+    }
+
+    public static boolean saveCategoryToDisk(Category category){
+        return saveDataFileToDisk(category.getName(),category);
     }
 
     /**Verwenden um gespeicherte Objekte im Programm wieder her zu stellen.
@@ -43,17 +50,17 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
      *
      * String mystring = XMLData.loadFromDisk(String.class, "mystring.xml");
      */
-    public static <T> Optional<T> loadDataFileFromDisk(Class<T> type, String fileName){
+    public static <T> T loadDataFileFromDisk(Class<T> type, String fileName){
         XMLDecoder decoder=null;
-        String path = basicPath+File.separator+fileName;
+        String path = basicPath+File.separator+fileName+".xml";
         try {
             decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
         } catch (FileNotFoundException e) {
-            return Optional.empty();
+            return null;
         }
         T result=(T)decoder.readObject();
         decoder.close();
-        return Optional.of(result);
+        return result;
     }
 
     /**Gibt alle Dateien in %APPDATA%\LernApp\Data zurück. Wenn keine Vorhanden, gibt es eine leere Liste zurück.
@@ -70,4 +77,8 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
 
         return result;
     }
+
+//    public List<Category> getCategoriesFromDisk(){
+//        //...
+//    }
 }
