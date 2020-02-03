@@ -5,5 +5,9 @@ public class Category extends ArrayList<Question> {
     private String name ;
 
 
-    public void setName(String englisch) {this.name = name; }
+    public void setName(String name) {this.name = name; }
+
+    public String getName(){
+        return name;
+    }
 }

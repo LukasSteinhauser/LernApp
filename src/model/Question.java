@@ -2,8 +2,17 @@ package model;
 
 public class Question {
 
-    String frage; String antwort;
-    public Question(String frage, String antwort) { this.frage = frage; this.antwort = antwort; }
+    private String frage;
+    private String antwort;
+
+    public Question(){}
+
+    public Question(String frage, String antwort) {
+
+        this.frage = frage;
+        this.antwort = antwort;
+
+    }
     public String toString() { return frage + "-" + antwort; }
 
 
