@@ -39,13 +39,20 @@ public class LernApp {
             }catch(NumberFormatException ex){
 
             }
+
+
             if(kategorien.size()>=gewaehlteZahl+1){
                 var richtigeAntworten = 0;
                 Category gewaehlteKategorie = kategorien.get(gewaehlteZahl);
 
                 Collections.shuffle(gewaehlteKategorie);
 
-                for (Question question: gewaehlteKategorie) {
+                System.out.println("wie viele Fragen sollen zu dem Thema beantwortet werden ?");
+                Scanner scanner = new Scanner(System.in);
+                int fragenAnzahl = scanner.nextInt();
+
+
+                for (Question question: gewaehlteKategorie.subList(0,fragenAnzahl)) {
                     if(showSimpleQuestion(question)){
                         ++richtigeAntworten;
                     }
