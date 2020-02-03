@@ -8,18 +8,19 @@ import java.util.List;
 
 public class TestData {
     public static List<Category> getTestCategories(){
+        //Objekt 1
         Category hauptstaedte = new Category();
         hauptstaedte.setName("Hauptstädte");
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von Deutschland?","Berlin"));
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von den Niederlanden?","Amsterdam"));
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von der Schweiz?","Bern"));
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von Syrien?","Damaskus"));
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von Griechenland?","Athen"));
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von Frankreich?","Paris"));
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von China?","Peking"));
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von den USA?","Washington D.C."));
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von Russland?","Moskau"));
-        hauptstaedte.add(new Question("Wie heißt die Hauptstatt von Großbritannien?","London"));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von Deutschland?","Berlin"));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von den Niederlanden?","Amsterdam"));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von der Schweiz?","Bern"));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von Syrien?","Damaskus"));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von Griechenland?","Athen"));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von Frankreich?","Paris"));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von China?","Peking"));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von den USA?","Washington D.C."));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von Russland?","Moskau"));
+        hauptstaedte.add(new Question("Wie heißt die Hauptstadt von Großbritannien?","London"));
 
         var result = new ArrayList<Category>();
         result.add(hauptstaedte);
