@@ -4,22 +4,15 @@ import data.TestData;
 import model.Category;
 import model.Question;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class LernApp {
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-
-
         //Lukas Beispiel
-
-
-        List<Category> test = TestData.getTestCategories();
-
-        Category cat = test.get(0);
 
         System.out.println("Welches Thema möchtest du?");
         System.out.println();
@@ -50,11 +43,15 @@ public class LernApp {
             }
             if(kategorien.size()>=gewaehlteZahl+1){
                 var richtigeAntworten = 0;
-                for (Question question: kategorien.get(gewaehlteZahl)) {
-                    if(simpleQuestion(question)){
+                ArrayList<Question> gewaehlteKategorie = kategorien.get(gewaehlteZahl);
+                Collections.shuffle(gewaehlteKategorie);
+
+                for (Question question: gewaehlteKategorie) {
+                    if(showSimpleQuestion(question)){
                         ++richtigeAntworten;
                     }
                 }
+
                 System.out.println(richtigeAntworten+" von "+kategorien.get(gewaehlteZahl).size()+" richtige Antworten");
                 System.out.println();
             }else{
@@ -63,7 +60,7 @@ public class LernApp {
         }
     }
 
-    static boolean simpleQuestion(Question question){
+    static boolean showSimpleQuestion(Question question){
 
         System.out.print(question.getFrage()+" ");
         var antwort = scanner.nextLine();
