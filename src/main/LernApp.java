@@ -85,13 +85,17 @@ public class LernApp {
         System.out.print(question.getFrage()+" ");
         var antwort = scanner.nextLine();
 
+        int score=0;
+
         System.out.println();
         if(question.getAntwort().equals(antwort)){
+            ++score;
             System.out.println("Richtig!");
             System.out.println();
         }else{
             System.out.println("Falsch, die richtige Antwort lautet: "+question.getAntwort());
             System.out.println();
         }
+        System.out.println("du hast "+ score +" richtige antworten ");
     }
 }

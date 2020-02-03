@@ -25,7 +25,8 @@ public class TestData {
         result.add(hauptstaedte);
         Category java = new Category();
         java.setName("Java");
-        java.add(new Question("Which of the below is valid way to instantiate an array in java? \n 1:int myArray [] = {1, 3, 5}; \n 2:int myArray [] [] = {1,2,3,4};\n 3:int [] myArray = {\"1\", \"2\", \"3\"};"  ,"Berlin"));
+        java.add(new Question("Which of the below is valid way to instantiate an array in java? \n 1:int myArray [] = {1, 3, 5}; \n 2:int myArray [] [] = {1,2,3,4};\n 3:int [] myArray = {\"1\", \"2\", \"3\"};"  ,"1"));
+        java.add(new Question("Which of the below are reserved keyword in java?\n 1:null \n 2:array \n 3:int", "3"));
         result.add(java);
         return result;
     }
