@@ -62,7 +62,7 @@ public class AddCategory {
         }
 
         System.out.println("Die Kategorie " + userCategory.getName() + " wurde erstellt\n" +
-                           "sie hat " + userCategory.size() + " Fragen & Antworten.\n");
+                "sie hat " + userCategory.size() + " Fragen & Antworten.\n");
 
         return userCategory;
     }
