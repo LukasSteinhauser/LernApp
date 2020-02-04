@@ -6,6 +6,8 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class XMLData {
 private static String basicPath = System.getenv("APPDATA")+ File.separator
@@ -52,7 +54,7 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
      */
     public static <T> T loadDataFileFromDisk(Class<T> type, String fileName){
         XMLDecoder decoder=null;
-        String path = basicPath+File.separator+fileName+".xml";
+        String path = basicPath+File.separator+fileName;
         try {
             decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
         } catch (FileNotFoundException e) {
@@ -67,7 +69,7 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
      *
      * Verwenden um die Themen zu erhalten.
      */
-    public static List<File> getDataFiles(){
+    public static List<File> loadDataFiles(){
         var result = Collections.EMPTY_LIST;
 
         var dir = new File(basicPath);
@@ -78,7 +80,20 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
         return result;
     }
 
-//    public List<Category> getCategoriesFromDisk(){
-//        //...
-//    }
+
+    public List<Category> getCategoriesFromDisk(){
+        var dataFiles = getDataFiles();
+        if(dataFiles.isEmpty()){
+            return Collections.emptyList();
+        }
+
+        return dataFiles.stream().flatMap(file -> {
+            Category category = loadDataFileFromDisk(Category.class, file.getName());
+
+            if(category !=null){
+                return Stream.of(category);
+            }
+            return Stream.empty();
+        }).collect(Collectors.toList());
+    }
 }
