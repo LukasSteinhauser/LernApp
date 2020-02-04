@@ -71,7 +71,7 @@ public class LernApp {
                     }
                 }
 
-                System.out.println(richtigeAntworten+" von "+kategorien.get(gewaehlteZahl).size()+" richtige Antworten");
+                System.out.println(richtigeAntworten+" von "+fragenAnzahl+" richtige Antworten");
                 System.out.println();
             }else{
                 System.out.println("Bitte den Index eines vorhandenen Themas eingeben");
