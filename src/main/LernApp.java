@@ -1,13 +1,11 @@
 package main;
 
 import data.TestData;
+import data.XMLData;
 import model.Category;
 import model.Question;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class LernApp {
     private static Scanner scanner = new Scanner(System.in);
@@ -41,18 +39,39 @@ public class LernApp {
             }catch(NumberFormatException ex){
 
             }
+
+
             if(kategorien.size()>=gewaehlteZahl+1){
                 var richtigeAntworten = 0;
-                ArrayList<Question> gewaehlteKategorie = kategorien.get(gewaehlteZahl);
+                Category gewaehlteKategorie = kategorien.get(gewaehlteZahl);
+
                 Collections.shuffle(gewaehlteKategorie);
 
-                for (Question question: gewaehlteKategorie) {
+                int fragenAnzahl;
+                Scanner scanner = new Scanner(System.in);
+                while (true){
+                    System.out.println("wie viele Fragen sollen zu dem Thema beantwortet werden ?");
+                    fragenAnzahl = scanner.nextInt();
+                    if (fragenAnzahl >kategorien.get(gewaehlteZahl).size()) {   System.out.println("Fragenanzahl darf nicht mehr als "+kategorien.get(gewaehlteZahl).size()+" sein");
+
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+
+
+
+
+
+                for (Question question: gewaehlteKategorie.subList(0,fragenAnzahl)) {
                     if(showSimpleQuestion(question)){
                         ++richtigeAntworten;
                     }
                 }
 
-                System.out.println(richtigeAntworten+" von "+kategorien.get(gewaehlteZahl).size()+" richtige Antworten");
+                System.out.println(richtigeAntworten+" von "+fragenAnzahl+" richtige Antworten");
                 System.out.println();
             }else{
                 System.out.println("Bitte den Index eines vorhandenen Themas eingeben");
