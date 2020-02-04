@@ -18,7 +18,7 @@ public class AddCategory {
 
         boolean wiederhole = true;
         while (wiederhole){
-            System.out.println("\nNeue Frage ? bitte druecke n ");
+            System.out.println("\nNeue Frage ? bitte druecke n oder N ");
             System.out.println("Fertig ? beliebige Taste druecken !");
             char auswahl = eingabe.nextLine().charAt(0);
 
@@ -26,8 +26,10 @@ public class AddCategory {
 
                 System.out.println("Fuer Frage mit freier Antwort druecke 1.");
                 System.out.println("Fuer multiple choice Frage druecke 2.");
+
                 int frageTyp = eingabe.nextInt();
                 eingabe.nextLine();
+
                 if(frageTyp == 1){
 
                     System.out.print("Die Frage lautet: ");
@@ -35,32 +37,40 @@ public class AddCategory {
                     System.out.print("Die Antwort lautet: ");
                     String bekommeAntwort = eingabe.nextLine();
 
-                    userCategory.add(new Question(bekommeFrage,bekommeAntwort));
+                    userCategory.add(new Question(bekommeAntwort, bekommeFrage));
                 }
+
                 if(frageTyp == 2){
                     System.out.print("Frage stellen: ");
-                    String multiFrage = eingabe.nextLine();
+                    String frage = eingabe.nextLine();
 
-                    System.out.println("Nun die Möglichkeiten mit der Nummerierung (Z.b. a_ b_ c_)  eingeben  ");
-                    System.out.print("Auswahl 1: ");
-                    String auswahlA = eingabe.nextLine();
-                    System.out.print("Auswahl 2: ");
-                    String auswahlB = eingabe.nextLine();
-                    System.out.print("Auswahl 3: ");
-                    String auswahlC = eingabe.nextLine();
+                    System.out.println("\nNun die Moeglichkeiten mit der Nummerierung (Z.b. a_ b_ c_ ...)  eingeben. ");
+                    System.out.println("Hinweis: Max der Moeglichkeiten ist 5.\nZum Beenden \"exit\" eingeben.\n");
+
+                    int i = 0;
+                    String[] frageUndMoeglicheAntworten = new String[5];
+
+                    frageUndMoeglicheAntworten[0] = frage;
+
+                    while(i <= 5 && frageUndMoeglicheAntworten[i] != "exit" && frageUndMoeglicheAntworten[i] != "Exit"){
+
+                        ++i;
+                        if(i <= 5) {
+                            System.out.println("Auswahl " + i + " :");
+                            frageUndMoeglicheAntworten[i] = eingabe.nextLine();
+                        }
+                    }
+
                     System.out.println("Die richtige Antwort eingeben: ");
                     String dieAntwort = eingabe.nextLine();
-                    // TODO: User gibt die richtige Antwort als a,b oder c und hat die möglichkeit mehrmals zu versuchen.
-                    userCategory.add(new Question(multiFrage,auswahlA + '\n' + auswahlB + '\n' + auswahlC, dieAntwort));
+                    userCategory.add(new Question(dieAntwort, frageUndMoeglicheAntworten));
                 }
-
-
             }
+
             else {
                 wiederhole = false;
             }
         }
-
         System.out.println("Die Kategorie " + userCategory.getName() + " wurde erstellt\n" +
                 "sie hat " + userCategory.size() + " Fragen & Antworten.\n");
 
