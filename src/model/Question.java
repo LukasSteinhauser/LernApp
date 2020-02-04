@@ -2,32 +2,31 @@ package model;
 
 public class Question {
 
-    private String frage;
+    private String[] frage;
     private String antwort;
-    private String multiAntwort;
 
-    public Question(){}
+    public Question(){
 
-    public Question(String frage, String antwort) {
+    }
+
+    public Question( String antwort, String... frage) {
 
         this.frage = frage;
         this.antwort = antwort;
 
     }
-    public Question(String frage, String antwort, String dieRichtigeAntwort ) {
 
-        this.frage = frage;
-        this.antwort = antwort;
-        multiAntwort = dieRichtigeAntwort;
-
-    }
-    public String toString() { return frage + "-" + antwort; }
-
-
-    public String getFrage() { return frage;
+    public String toString() {
+        return frage + "-" + antwort;
     }
 
-    public void setFrage(String frage) {
+
+    public String getFrage() {
+
+        return frage[0];
+    }
+
+    public void setFrage(String... frage) {
         this.frage = frage;
     }
 
