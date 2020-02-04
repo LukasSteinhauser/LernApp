@@ -4,6 +4,7 @@ public class Question {
 
     private String frage;
     private String antwort;
+    private String multiAntwort;
 
     public Question(){}
 
@@ -11,6 +12,13 @@ public class Question {
 
         this.frage = frage;
         this.antwort = antwort;
+
+    }
+    public Question(String frage, String antwort, String dieRichtigeAntwort ) {
+
+        this.frage = frage;
+        this.antwort = antwort;
+        multiAntwort = dieRichtigeAntwort;
 
     }
     public String toString() { return frage + "-" + antwort; }
