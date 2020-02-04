@@ -15,7 +15,7 @@ public class LernApp {
         System.out.println("Welches Thema möchtest du?");
         System.out.println();
 
-        var kategorien = TestData.getTestCategories();
+        var kategorien = XMLData.initCategories();
 
         for(int i = 0; i<kategorien.size();++i){
             System.out.println(i+": "+kategorien.get(i).getName());
@@ -33,6 +33,8 @@ public class LernApp {
                 System.out.println("Auf wiedersehen ^^");
                 break;
             }
+
+
 
             try{
                 gewaehlteZahl = Integer.parseInt(eingabe);
@@ -59,11 +61,6 @@ public class LernApp {
                         break;
                     }
                 }
-
-
-
-
-
 
                 for (Question question: gewaehlteKategorie.subList(0,fragenAnzahl)) {
                     if(showSimpleQuestion(question)){

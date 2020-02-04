@@ -55,6 +55,7 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
     public static <T> T loadDataFileFromDisk(Class<T> type, String fileName){
         XMLDecoder decoder=null;
         String path = basicPath+File.separator+fileName;
+        File file = new File(path);
         try {
             decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
         } catch (FileNotFoundException e) {
@@ -81,7 +82,7 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
     }
 
 
-    public List<Category> getCategoriesFromDisk(){
+    public static List<Category> getCategoriesFromDisk(){
         var dataFiles = loadDataFiles();
         if(dataFiles.isEmpty()){
             return Collections.emptyList();
@@ -95,5 +96,17 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
             }
             return Stream.empty();
         }).collect(Collectors.toList());
+    }
+
+
+    public static List<Category> initCategories(){
+        var list = getCategoriesFromDisk();
+        if(list.size()==0){
+            list = TestData.getTestCategories();
+            list.forEach(category->{
+                saveCategoryToDisk(category);
+            });
+        }
+        return list;
     }
 }

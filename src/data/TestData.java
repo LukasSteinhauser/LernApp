@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestData {
+    void foo(String b, String... a){
+
+    }
+
+
+
     public static List<Category> getTestCategories(){
         //Objekt 1
         Category hauptstaedte = new Category();
