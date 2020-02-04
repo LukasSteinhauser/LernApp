@@ -82,7 +82,7 @@ private static String basicPath = System.getenv("APPDATA")+ File.separator
 
 
     public List<Category> getCategoriesFromDisk(){
-        var dataFiles = getDataFiles();
+        var dataFiles = loadDataFiles();
         if(dataFiles.isEmpty()){
             return Collections.emptyList();
         }
