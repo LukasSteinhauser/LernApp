@@ -80,10 +80,10 @@ public class AddCategory {
 
     public static List<Category> meineMappe(Category userCategory){
 
-        var mappe =TestData.getTestCategories();
+        var mappe = TxtData.initCategories();
         mappe.add(userCategory);
 
-        XMLData.saveCategoryToDisk(userCategory);
+        TxtData.saveCategory(userCategory);
 
         return mappe;
     }
