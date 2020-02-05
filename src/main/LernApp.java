@@ -36,7 +36,6 @@ public class LernApp {
             }
 
 
-
             try{
                 gewaehlteZahl = Integer.parseInt(eingabe);
             }catch(NumberFormatException ex){
