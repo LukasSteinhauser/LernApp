@@ -77,4 +77,15 @@ public class AddCategory {
 
         return userCategory;
     }
+
+    public static List<Category> meineMappe(Category userCategory){
+
+        var mappe =TestData.getTestCategories();
+        mappe.add(userCategory);
+
+        XMLData.saveCategoryToDisk(userCategory);
+
+        return mappe;
+    }
+
 }
