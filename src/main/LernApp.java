@@ -16,22 +16,22 @@ public class LernApp {
         System.out.println("Weiter mit den Verfuegbaren Kategorien? druecke 2"); // verbessern
         int auswahl = scanner.nextInt();
 
-        if (auswahl == 1){
-            var newCategory = AddCategory.erstelleCategory();
+        List<Category> kategorien;
 
-            var getMeineMappe = TestData.getTestCategories();
-            getMeineMappe.add(newCategory);
-            XMLData.saveCategoryToDisk(newCategory);
+        if(auswahl == 1){
+            var neueKategorie = AddCategory.erstelleCategory() ;
 
+            var dieMappe = AddCategory.meineMappe(neueKategorie);
+
+            System.out.println("Welches Thema möchtest du?\n");
+
+            kategorien = dieMappe;
         }
         else {
-            System.out.println("okay"); //nur Test
+            kategorien = TestData.getTestCategories();
         }
 
         System.out.println("Welches Thema möchtest du?\n");
-
-        var kategorien = TestData.getTestCategories();
-//        var kategorien = XMLData.initCategories();
 
         for(int i = 0; i< kategorien.size(); ++i){
             System.out.println(i+": "+kategorien.get(i).getName());
