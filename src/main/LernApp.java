@@ -1,5 +1,6 @@
 package main;
 
+import data.AddCategory;
 import data.TestData;
 import data.XMLData;
 import model.Category;
@@ -11,14 +12,28 @@ public class LernApp {
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         //Lukas Beispiel
+        System.out.println("Eine Kategorie hinzufuegen? druecke 1");
+        System.out.println("Weiter mit den Verfuegbaren Kategorien? druecke 2"); // verbessern
+        int auswahl = scanner.nextInt();
 
-        System.out.println("Welches Thema möchtest du?");
-        System.out.println();
+        if (auswahl == 1){
+            var newCategory = AddCategory.erstelleCategory();
+
+            var getMeineMappe = TestData.getTestCategories();
+            getMeineMappe.add(newCategory);
+            XMLData.saveCategoryToDisk(newCategory);
+
+        }
+        else {
+            System.out.println("okay"); //nur Test
+        }
+
+        System.out.println("Welches Thema möchtest du?\n");
 
         var kategorien = TestData.getTestCategories();
 //        var kategorien = XMLData.initCategories();
 
-        for(int i = 0; i<kategorien.size();++i){
+        for(int i = 0; i< kategorien.size(); ++i){
             System.out.println(i+": "+kategorien.get(i).getName());
         }
         System.out.println("Exit: Programm beenden");
