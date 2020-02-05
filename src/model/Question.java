@@ -22,8 +22,11 @@ public class Question {
 
 
     public String getFrage() {
-
-        return frage[0];
+        StringBuilder sb = new StringBuilder();
+        for (String str:frage) {
+            sb.append(str).append(System.lineSeparator());
+        }
+        return sb.toString();
     }
 
     public void setFrage(String... frage) {
