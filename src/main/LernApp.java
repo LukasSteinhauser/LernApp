@@ -15,7 +15,8 @@ public class LernApp {
         System.out.println("Welches Thema möchtest du?");
         System.out.println();
 
-        var kategorien = XMLData.initCategories();
+        var kategorien = TestData.getTestCategories();
+//        var kategorien = XMLData.initCategories();
 
         for(int i = 0; i<kategorien.size();++i){
             System.out.println(i+": "+kategorien.get(i).getName());
