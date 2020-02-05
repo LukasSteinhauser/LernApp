@@ -1,6 +1,8 @@
 package data;
 import model.Category;
 import model.Question;
+
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -47,17 +49,16 @@ public class AddCategory {
                     System.out.println("\nNun die Moeglichkeiten mit der Nummerierung (Z.b. a_ b_ c_ ...)  eingeben. ");
                     System.out.println("Hinweis: Max der Moeglichkeiten ist 5.\nZum Beenden \"exit\" eingeben.\n");
 
-                    int i = 0;
-                    String[] frageUndMoeglicheAntworten = new String[5];
+                    String[] frageUndMoeglicheAntworten = new String[6];
 
                     frageUndMoeglicheAntworten[0] = frage;
 
-                    while(i <= 5 && frageUndMoeglicheAntworten[i] != "exit" && frageUndMoeglicheAntworten[i] != "Exit"){
-
-                        ++i;
-                        if(i <= 5) {
+                    for(int i = 1; i < 6; i++){
                             System.out.println("Auswahl " + i + " :");
                             frageUndMoeglicheAntworten[i] = eingabe.nextLine();
+
+                            if ("exit".equals(frageUndMoeglicheAntworten[i].toLowerCase())){
+                                break;
                         }
                     }
 
