@@ -5,10 +5,12 @@ import model.Question;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TxtData {
     private static String basicPath = System.getenv("APPDATA")+ File.separator
@@ -44,7 +46,15 @@ public class TxtData {
         File dir = new File(basicPath);
 
         if(dir.exists()&&dir.exists()){
-            var files = new ArrayList<File>(Arrays.asList(dir.listFiles()));
+            var files = new ArrayList<File>(Arrays.asList(dir.listFiles()))
+                    .stream().filter(file -> {
+                String name = file.getName();
+
+                if(name.length()>=4&&".txt".equals(name.substring(name.length()-4,name.length()).toLowerCase())){
+                    return true;
+                }
+                return false;
+            }).collect(Collectors.toList());
 
             var result = new ArrayList<Category>();
 
