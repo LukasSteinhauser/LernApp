@@ -1,5 +1,6 @@
 package data;
 
+import main.Scan;
 import model.Category;
 import model.Question;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TxtData {
+
     private static String basicPath = System.getenv("APPDATA")+ File.separator
             +"LernApp"+File.separator+"Data"+File.separator;
 
@@ -25,22 +27,97 @@ public class TxtData {
         var diesCategory = getCategorieFilePath(category);
         var diesesFile = new  File(diesCategory);
 
-        if (bestaetigung.equals("ja".toLowerCase()) && category.getName() != "Java" && category.getName() != "Haupstädte"){
+        final boolean meineKategorien = category.getName().equals("Java") && category.getName().equals("Haupstädte");
+
+        if (bestaetigung.equals("ja".toLowerCase()) && meineKategorien){
             diesesFile.delete();
-            System.out.println("File deleted successfully");
         }
     }
 
-    public static void editCategory (Category category, String newName){ // wird noch erweitert
+    public static void editCategory (Category category){ // wird noch erweitert
 
-        if (category.getName() != "Java" && category.getName() != "Haupstädte") {
+        final boolean meineKategorien = category.getName().equals("Java") && category.getName().equals("Haupstädte");
 
-            deleteCategory(category,"ja");
-            category.setName(newName);
-            saveCategory(category);
+        if (meineKategorien) {
 
+            System.out.println("Category umbennen ? 1 eingeben.");
+            System.out.println("Fragen bearbeiten ? 2 eingeben.");
+            int auswahl = Scan.nextInt();
+
+
+            if (auswahl == 1){
+                deleteCategory(category,"ja");
+                System.out.print("Wie lautet deinen gewünschten Namen: ");
+                String newName = Scan.nextLine();
+                category.setName(newName);
+                saveCategory(category);
+            }
+
+            if(auswahl == 2){
+                int indexOfCategory = 0;
+
+                for(Question question : category){
+
+                    System.out.println("Hier ist die Frage: ");
+                    System.out.println(question.getFrage());
+
+                    System.out.println("Bearbeite die Frage ? tippe \"1\" \nDie Frage beibehalten tippe  \"2\" ");
+                    int abfrage = Scan.nextInt();
+
+                    if(abfrage == 1){
+
+                        for (int i = 0; i < question.indexLength(); i++){ // checke jedes index vom Question
+
+                            System.out.println(question.getFrageEinzeln(i));
+                            System.out.println("Edit ? 1\nDelete ? 2\nso lassen ? 3 \nFertig ? 4 ");
+                            int wasJetzt = Scan.nextInt();
+
+                            if(wasJetzt == 1){
+                                System.out.print("Wie lautet deine Änderung: ");
+                                String newIndexOfQuestion = Scan.nextLine();
+                                question.setFrageEinzeln(i, newIndexOfQuestion);
+                            }
+                            if(wasJetzt == 2){
+                                // kommt noch (Möglichkeit um eine Frage zu löschen)
+                            }
+
+                            if(wasJetzt == 3){
+
+                                // ausgabe
+                            }
+
+                            if(wasJetzt == 4){ // TODO: keine Antworten mehr sollen gespeichert werden
+                                category.set(indexOfCategory,question);
+                                saveCategory(category);
+                                break;
+                            }
+                        }
+                        System.out.print("Die Antwort der Frage ist: ");
+                        System.out.println(question.getAntwort());
+                        System.out.println("Diese Antwort bearbeiten ? tippe \"1\" \nDiese Antwort behalten ? tippe \"2\" ");
+                        int wasJetzt2 = Scan.nextInt();
+
+                        if(wasJetzt2 == 1){
+                            System.out.print("Wie lautet deine Änderung: ");
+                            String neueAntwort = Scan.nextLine();
+                            question.setAntwort(neueAntwort);
+
+                        }
+
+                        if(wasJetzt2 == 2){
+                            // kommt noch eine Ausgabe
+                        }
+
+                        category.set(indexOfCategory,question);
+                        saveCategory(category);
+                        ++indexOfCategory;
+                    }
+                    if(abfrage == 2){
+                        break;
+                    }
+                }
+            }
         }
-
     }
 
     public static void saveCategory(Category category){
