@@ -13,6 +13,8 @@ public class LernApp {
 
     public static void main(String[] args) {
         //Lukas Beispiel
+
+        //TODO: alles in einer Schleifen packen.
         System.out.println("Eine Kategorie hinzufuegen? druecke 1");
         System.out.println("Category bearbeiten oder löschen ? drücke 2");
         System.out.println("Weiter mit den Verfügbaren Kategorien? drücke 3"); // verbessern
@@ -27,22 +29,21 @@ public class LernApp {
         }
 
         if(auswahl == 2) {
-            System.out.println("Edit ? 1 eingeben.\nDelete ? 2 eingeben.");
+            System.out.println("Edit Category ? 1 eingeben.\nDelete Category ? 2 eingeben.");
             int editOrDelete = Scan.nextInt();
 
             System.out.println("welche Category ?");
             System.out.print("Name der Category eingeben: ");
             String bekommeCategoryName = Scan.nextLine();
+            System.out.println();
+
             var dieMappe = TxtData.initCategories();
 
             if (editOrDelete == 1) {
                 for (Category dieseCategory : dieMappe) {
-
                     if (dieseCategory.getName().equals(bekommeCategoryName)) {
-                        System.out.print("Wie lautet deinen gewünschten Namen: ");
-                        String newName = Scan.nextLine();
 
-                        TxtData.editCategory(dieseCategory, newName);
+                        TxtData.editCategory(dieseCategory);
                         break;
 
                     }
@@ -56,6 +57,7 @@ public class LernApp {
                         String bestaetigung = Scan.nextLine();
 
                         TxtData.deleteCategory(dieseCategory, bestaetigung);
+                        System.out.println("File deleted successfully");
                         break;
                     }
                 }
