@@ -2,6 +2,7 @@ package data;
 import model.Category;
 import model.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -49,22 +50,23 @@ public class AddCategory {
                     System.out.println("\nNun die Moeglichkeiten mit der Nummerierung (Z.b. a_ b_ c_ ...)  eingeben. ");
                     System.out.println("Hinweis: Max der Moeglichkeiten ist 5.\nZum Beenden \"exit\" eingeben.\n");
 
-                    String[] frageUndMoeglicheAntworten = new String[6];
+                    List<String> frageUndMoeglicheAntworten = new ArrayList<String>();
 
-                    frageUndMoeglicheAntworten[0] = frage;
+                    frageUndMoeglicheAntworten.add(frage);
 
                     for(int i = 1; i < 6; i++){
                             System.out.println("Auswahl " + i + " :");
-                            frageUndMoeglicheAntworten[i] = eingabe.nextLine();
+                            String line = eingabe.nextLine();
 
-                            if ("exit".equals(frageUndMoeglicheAntworten[i].toLowerCase())){
+                            if ("exit".equals(line)){
                                 break;
                         }
+                        frageUndMoeglicheAntworten.add(line);
                     }
 
                     System.out.println("Die richtige Antwort eingeben: ");
                     String dieAntwort = eingabe.nextLine();
-                    userCategory.add(new Question(dieAntwort, frageUndMoeglicheAntworten));
+                    userCategory.add(new Question(dieAntwort, frageUndMoeglicheAntworten.toArray(new String[frageUndMoeglicheAntworten.size()])));
                 }
             }
 
