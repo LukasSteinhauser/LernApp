@@ -9,7 +9,7 @@ public class Question {
 
     }
 
-    public Question( String antwort, String... frage) {
+    public Question(String antwort, String... frage) {
 
         this.frage = frage;
         this.antwort = antwort;
@@ -20,6 +20,17 @@ public class Question {
         return frage + "-" + antwort;
     }
 
+    public String getFrageEinzeln(int hier){
+        return frage[hier];
+    }
+
+    public void setFrageEinzeln(int hier, String frage){
+        this.frage[hier] = frage;
+    }
+
+    public int indexLength (){
+        return frage.length;
+    }
 
     public String getFrage() {
         StringBuilder sb = new StringBuilder();
