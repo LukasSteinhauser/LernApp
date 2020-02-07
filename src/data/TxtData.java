@@ -20,6 +20,29 @@ public class TxtData {
         return basicPath + category.getName() + ".txt";
     }
 
+    public  static void deleteCategory (Category category, String bestaetigung){
+
+        var diesCategory = getCategorieFilePath(category);
+        var diesesFile = new  File(diesCategory);
+
+        if (bestaetigung.equals("ja".toLowerCase()) && category.getName() != "Java" && category.getName() != "Haupstädte"){
+            diesesFile.delete();
+            System.out.println("File deleted successfully");
+        }
+    }
+
+    public static void editCategory (Category category, String newName){ // wird noch erweitert
+
+        if (category.getName() != "Java" && category.getName() != "Haupstädte") {
+
+            deleteCategory(category,"ja");
+            category.setName(newName);
+            saveCategory(category);
+
+        }
+
+    }
+
     public static void saveCategory(Category category){
         var path = getCategorieFilePath(category);
 
