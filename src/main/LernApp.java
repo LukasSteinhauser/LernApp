@@ -14,7 +14,8 @@ public class LernApp {
     public static void main(String[] args) {
         //Lukas Beispiel
         System.out.println("Eine Kategorie hinzufuegen? druecke 1");
-        System.out.println("Weiter mit den Verfuegbaren Kategorien? druecke 2"); // verbessern
+        System.out.println("Category bearbeiten oder löschen ? drücke 2");
+        System.out.println("Weiter mit den Verfügbaren Kategorien? drücke 3"); // verbessern
         int auswahl = Scan.nextInt();
 
         if (auswahl == 1){
@@ -24,8 +25,41 @@ public class LernApp {
             getMeineMappe.add(newCategory);
             TxtData.saveCategory(newCategory);
         }
-        else {
-            System.out.println("okay"); //nur Test
+
+        if(auswahl == 2) {
+            System.out.println("Edit ? 1 eingeben.\nDelete ? 2 eingeben.");
+            int editOrDelete = Scan.nextInt();
+
+            System.out.println("welche Category ?");
+            System.out.print("Name der Category eingeben: ");
+            String bekommeCategoryName = Scan.nextLine();
+            var dieMappe = TxtData.initCategories();
+
+            if (editOrDelete == 1) {
+                for (Category dieseCategory : dieMappe) {
+
+                    if (dieseCategory.getName().equals(bekommeCategoryName)) {
+                        System.out.print("Wie lautet deinen gewünschten Namen: ");
+                        String newName = Scan.nextLine();
+
+                        TxtData.editCategory(dieseCategory, newName);
+                        break;
+
+                    }
+                }
+            }
+            if (editOrDelete == 2) {
+                for (Category dieseCategory : dieMappe) {
+
+                    if (dieseCategory.getName().equals(bekommeCategoryName)) {
+                        System.out.print("Bist du sicher !! schreibe ja zum bestätigen:");
+                        String bestaetigung = Scan.nextLine();
+
+                        TxtData.deleteCategory(dieseCategory, bestaetigung);
+                        break;
+                    }
+                }
+            }
         }
 
         System.out.println("Welches Thema möchtest du?\n");
