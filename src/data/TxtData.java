@@ -29,7 +29,7 @@ public class TxtData {
 
         final boolean meineKategorien = category.getName().equals("Java") && category.getName().equals("Haupstädte");
 
-        if (bestaetigung.equals("ja".toLowerCase()) && meineKategorien){
+        if (bestaetigung.equals("ja".toLowerCase()) && !meineKategorien){
             diesesFile.delete();
         }
     }
@@ -38,7 +38,7 @@ public class TxtData {
 
         final boolean meineKategorien = category.getName().equals("Java") && category.getName().equals("Haupstädte");
 
-        if (meineKategorien) {
+        if (!meineKategorien) {
 
             System.out.println("Category umbennen ? 1 eingeben.");
             System.out.println("Fragen bearbeiten ? 2 eingeben.");
@@ -58,7 +58,7 @@ public class TxtData {
 
                 for(Question question : category){
 
-                    System.out.println("Hier ist die Frage: ");
+                    System.out.println("Hier ist die Frage: \n");
                     System.out.println(question.getFrage());
 
                     System.out.println("Bearbeite die Frage ? tippe \"1\" \nDie Frage beibehalten tippe  \"2\" ");
@@ -69,7 +69,7 @@ public class TxtData {
                         for (int i = 0; i < question.indexLength(); i++){ // checke jedes index vom Question
 
                             System.out.println(question.getFrageEinzeln(i));
-                            System.out.println("Edit ? 1\nDelete ? 2\nso lassen ? 3 \nFertig ? 4 ");
+                            System.out.println("\nEdit ? 1\nDelete ? 2\nso lassen ? 3 \nFertig ? 4 ");
                             int wasJetzt = Scan.nextInt();
 
                             if(wasJetzt == 1){
@@ -83,7 +83,7 @@ public class TxtData {
 
                             if(wasJetzt == 3){
 
-                                // ausgabe
+                                System.out.println("Okay !!\n");
                             }
 
                             if(wasJetzt == 4){ // TODO: keine Antworten mehr sollen gespeichert werden
@@ -92,7 +92,7 @@ public class TxtData {
                                 break;
                             }
                         }
-                        System.out.print("Die Antwort der Frage ist: ");
+                        System.out.print("\nDie Antwort der Frage ist: ");
                         System.out.println(question.getAntwort());
                         System.out.println("Diese Antwort bearbeiten ? tippe \"1\" \nDiese Antwort behalten ? tippe \"2\" ");
                         int wasJetzt2 = Scan.nextInt();
@@ -105,7 +105,7 @@ public class TxtData {
                         }
 
                         if(wasJetzt2 == 2){
-                            // kommt noch eine Ausgabe
+                            System.out.println("Okay !!\n");
                         }
 
                         category.set(indexOfCategory,question);
@@ -113,7 +113,8 @@ public class TxtData {
                         ++indexOfCategory;
                     }
                     if(abfrage == 2){
-                        break;
+                        category.set(indexOfCategory,question);
+                        ++indexOfCategory;
                     }
                 }
             }
