@@ -3,6 +3,7 @@ package data;
 import main.Scan;
 import model.Category;
 import model.Question;
+import model.UserProfile;
 
 import java.io.*;
 import java.lang.reflect.Array;
@@ -18,7 +19,7 @@ public class TxtData {
     private static String basicPath = System.getenv("APPDATA") + File.separator
             + "LernApp" + File.separator + "Data" + File.separator;
 
-    private static String getCategorieFilePath(Category category) {
+    private static final String getCategorieFilePath(Category category) {
         return basicPath + category.getName() + ".txt";
     }
 
@@ -236,5 +237,9 @@ public class TxtData {
             }
         }
         return list;
+    }
+
+    public static void saveUserProfile(UserProfile profile){
+
     }
 }
