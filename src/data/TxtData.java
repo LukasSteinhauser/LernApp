@@ -240,6 +240,40 @@ public class TxtData {
     }
 
     public static void saveUserProfile(UserProfile profile){
+        String path = UserProfile.basicPath + profile.getId() + ".txt";
+        int historySize = 20;
+        List<String> history = profile.getQuestionHistory();
+
+        if(history.size()>historySize){
+            history = history.subList(history.size()-20,history.size());
+        }
+
+
+
+        try {
+            File file = new File(path);
+
+            file.getParentFile().mkdirs();
+
+            PrintWriter writer = new PrintWriter(file);
+
+            for (var historyEntry : history) {
+                writer.println(historyEntry);
+            }
+
+            writer.println();
+
+            for(var scoreEntry : profile.getScores().entrySet()){
+                var score = scoreEntry.getValue();
+                String writeString = scoreEntry.getKey() + ";" + score.getSuccess() + ";" + score.getFailure();
+                writer.println(writeString);
+            }
+
+            writer.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
 
     }
 }

@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.*;
 
 public class UserProfile {
-    private static final String basicPath = System.getenv("APPDATA") + File.separator
+    public static final String basicPath = System.getenv("APPDATA") + File.separator
             + "LernApp" + File.separator + "Profiles" + File.separator;
 
     private String id = "default";
@@ -13,6 +13,9 @@ public class UserProfile {
 
     private Map<String, Score> scores = new HashMap<>();
 
+
+
+    //region getter/setter
     public String getId() {
         return id;
     }
@@ -36,4 +39,5 @@ public class UserProfile {
     public void setScores(Map<String, Score> scores) {
         this.scores = scores;
     }
+    //endregion
 }

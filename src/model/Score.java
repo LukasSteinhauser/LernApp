@@ -4,6 +4,7 @@ public class Score {
     private int success = 0;
     private int failure = 0;
 
+    //region getter/setter
     public int getSuccess() {
         return success;
     }
@@ -19,4 +20,5 @@ public class Score {
     public void setFailure(int failure) {
         this.failure = failure;
     }
+    //endregion
 }
