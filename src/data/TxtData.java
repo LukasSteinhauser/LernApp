@@ -3,15 +3,13 @@ package data;
 import main.Scan;
 import model.Category;
 import model.Question;
+import model.Score;
 import model.UserProfile;
 
 import java.io.*;
 import java.lang.reflect.Array;
 import java.security.cert.CollectionCertStoreParameters;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TxtData {
@@ -172,7 +170,7 @@ public class TxtData {
     public static List<Category> loadAllCategories() {
         File dir = new File(basicPath);
 
-        if (dir.exists() && dir.exists()) {
+        if (dir.exists()) {
             var files = new ArrayList<File>(Arrays.asList(dir.listFiles()))
                     .stream().filter(file -> {
                         String name = file.getName();
@@ -248,8 +246,6 @@ public class TxtData {
             history = history.subList(history.size()-20,history.size());
         }
 
-
-
         try {
             File file = new File(path);
 
@@ -273,7 +269,49 @@ public class TxtData {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
 
+    public static UserProfile loadUserProfile(String profile){
+        UserProfile result = new UserProfile();
 
+        if(profile==null){
+            profile = UserProfile.defaultName;
+        }
+        String path = UserProfile.basicPath + profile+".txt";
+
+        File file = new File(path);
+        if(file.exists()){
+            try{
+
+                boolean historyMode = true;
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+
+                var history = new ArrayList<String>();
+                var scores = new HashMap<String, Score>();
+
+                for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+                    line = line.strip();
+                    if(line.isEmpty()){
+                        historyMode = false;
+                        continue;
+                    }
+                    if(historyMode){
+                        history.add(line);
+                    }else {
+                        String[] split = line.split(";");
+                        Score tempScore = new Score(split[0]);
+                        scores.put(tempScore.getSignature(),tempScore);
+                    }
+                }
+                result.setId(profile);
+                result.setQuestionHistory(history);
+                result.setScores(scores);
+
+            }catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+
+        return result;
     }
 }

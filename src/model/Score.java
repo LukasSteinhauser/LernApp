@@ -1,8 +1,33 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Score {
     private int success = 0;
     private int failure = 0;
+
+    private LocalDate dateSignature;
+    private String categoryName;
+    private int questionIndex;
+
+    public Score(LocalDate dateSignature, String categoryName, int questionIndex) {
+        this.dateSignature = dateSignature;
+        this.categoryName = categoryName;
+        this.questionIndex = questionIndex;
+    }
+
+    public Score(String signature){
+        String[] split = signature.split("|");
+        this.dateSignature = LocalDate.parse(split[0]);
+        this.categoryName = split[1];
+        this.questionIndex = Integer.parseInt(split[2]);
+    }
+
+    public String getSignature(){
+        return dateSignature.toString()+"|"+categoryName+"|"+questionIndex;
+    }
+
+
 
     //region getter/setter
     public int getSuccess() {
@@ -20,5 +45,18 @@ public class Score {
     public void setFailure(int failure) {
         this.failure = failure;
     }
+
+    public LocalDate getDateSignature() {
+        return dateSignature;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public int getQuestionIndex() {
+        return questionIndex;
+    }
+
     //endregion
 }

@@ -7,7 +7,9 @@ public class UserProfile {
     public static final String basicPath = System.getenv("APPDATA") + File.separator
             + "LernApp" + File.separator + "Profiles" + File.separator;
 
-    private String id = "default";
+    public static final String defaultName = "default";
+
+    private String id = defaultName;
 
     private List<String> questionHistory = new ArrayList<>();
 
