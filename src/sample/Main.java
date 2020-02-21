@@ -120,6 +120,8 @@ public class Main extends Application  {
 
         Group layout1Group = new Group();
         layout1Group.getChildren().addAll(imageView,layout1);
+        imageView.setFitWidth();
+        layout1Group.setAutoSizeChildren(true);
 
         HBox toolBar = new HBox();
         toolBar.setSpacing(10);
@@ -136,7 +138,7 @@ public class Main extends Application  {
         layout1.getChildren().addAll(new StackPane(toolBar));
         layout1.getChildren().addAll(rdVBox );
         layout1.getChildren().addAll(new HBox(nameField,leerzeichen, goBtn));
-        Scene result=new Scene(layout1Group,400,235);
+        Scene result=new Scene(layout1Group);
 
         return result;
     }

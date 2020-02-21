@@ -24,10 +24,12 @@ public class Score {
     }
 
     public String getSignature(){
-        return dateSignature.toString()+"|"+categoryName+"|"+questionIndex;
+        return getSignature(dateSignature, categoryName, questionIndex);
     }
 
-
+    public static String getSignature(LocalDate dateSignature, String categoryName, int questionIndex){
+        return dateSignature.toString()+"|"+categoryName+"|"+questionIndex;
+    }
 
     //region getter/setter
     public int getSuccess() {
