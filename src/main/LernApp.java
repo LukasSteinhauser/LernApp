@@ -1,5 +1,6 @@
 package main;
 
+import com.sun.javafx.scene.layout.region.BackgroundSizeConverter;
 import data.TxtData;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import model.Category;
 import model.Question;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,12 +28,13 @@ import java.util.function.Function;
 
 public class LernApp extends Application  {
 
+
     TextField bekommeKategorieNameField;
     Label bekommeKategorieLbl;
-    Button bekommeKategorieBtn;
+    Button bekommeKategorieBtn,home;
 
     Label frageTxt,leerzeichen,antwortPruefer, willkommen;
-    TextField input,nameField;
+    TextField input, fragenAnzahlField;
     Button answerBtn, goBtn,add,delete,edit;
 
     ArrayList<RadioButton> rdCategory ;
@@ -40,9 +43,9 @@ public class LernApp extends Application  {
 
     ToggleGroup group;
     Scene scene1,scene2,scene3;
-    Image image=new Image("img/Background.jpg");
-    ImageView imageView = new ImageView(image);
-    ImageView imageView2 = new ImageView(image);
+    BackgroundImage myBG = new BackgroundImage(new Image("img/Background1.png",250,175,false,true),
+            BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
+            BackgroundSize.DEFAULT);
     Image trueImage =new Image("img/true.png",15, 15, false, false);
     Image falseImage =new Image("img/false.png",15, 15, false, false);
     ImageView trueView = new ImageView(trueImage);
@@ -107,44 +110,51 @@ public class LernApp extends Application  {
         willkommen.setTextFill(Color.web("#F0FFF0"));
         willkommen.setFont(Font.font("Arial",30));
 
-        nameField = new TextField();
-        nameField.setPromptText("wie viele Fragen sollen beantwortet werden ?");
-        nameField.setPrefColumnCount(20);
+        fragenAnzahlField = new TextField();
+        fragenAnzahlField.setPromptText("wie viele Fragen sollen beantwortet werden ?");
+        fragenAnzahlField.setPrefColumnCount(20);
 
         //layout1
 
 
+        StackPane layout1StackP = new StackPane();
+        StackPane layout1border = new StackPane();
         VBox layout1 =new VBox ();
+        layout1border.getChildren().addAll(layout1);
+        layout1StackP.getChildren().addAll(layout1border);
+        layout1border.setPadding(new Insets(20,20,20,20));
+        layout1border.setBackground(new Background(myBG));
+        layout1.setBorder(new Border(new BorderStroke(Color.LIGHTBLUE, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(4))));
 
-
-
-        Group layout1Group = new Group();
-        layout1Group.getChildren().addAll(imageView,layout1);
-        layout1Group.setAutoSizeChildren(true);
 
         HBox toolBar = new HBox();
         toolBar.setSpacing(10);
         toolBar.getChildren().addAll(add,delete,edit);
 
-
         VBox rdVBox = new VBox();
         rdVBox.getChildren().addAll( rdCategory);
 
-
         layout1.setSpacing(10);
-        layout1.setPadding(new Insets(40,10,10,55));
+        layout1.setPadding(new Insets(60,10,10,75));
         layout1.getChildren().addAll(new StackPane(willkommen));
         layout1.getChildren().addAll(new StackPane(toolBar));
         layout1.getChildren().addAll(rdVBox );
-        layout1.getChildren().addAll(new HBox(nameField,leerzeichen, goBtn));
-        Scene result=new Scene(layout1Group);
+        layout1.getChildren().addAll(new HBox(fragenAnzahlField,leerzeichen, goBtn));
+        Scene result=new Scene(layout1StackP,500,350);
 
         return result;
     }
     public Scene frageStellen(Stage primaryStage, Category currentCategory, int indexOfQuestion){
         Question question = currentCategory.get(indexOfQuestion);
 
-        Pane layout2Fragestellen =new Pane();
+        StackPane layout2StackP = new StackPane();
+        StackPane layout2border = new StackPane();
+        layout2StackP.getChildren().addAll(layout2border);
+        layout2border.setPadding(new Insets(20,20,20,20));
+
+        VBox layout2Fragestellen =new VBox();
+        layout2border.getChildren().addAll(layout2Fragestellen);
+        layout2Fragestellen.setBorder(new Border(new BorderStroke(Color.LIGHTBLUE, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(4))));
         HBox antwortPrueferHBox = new HBox();
         antwortPrueferHBox.setPadding(new Insets(5,0,0,0));
 
@@ -180,6 +190,8 @@ public class LernApp extends Application  {
 
         });
 
+        home = new Button("<-- zurück");
+        home.setOnAction(e-> { primaryStage.setScene(scene1);});
 
 
         //layout2
@@ -187,19 +199,15 @@ public class LernApp extends Application  {
 
 
 
-        Group layout2Group = new Group();
-        layout2Group.getChildren().addAll(imageView,layout2Fragestellen);
 
+        layout2border.setBackground(new Background(myBG));
 
-        layout2Fragestellen.getChildren().addAll(answerBtn,input, frageTxt,antwortPrueferHBox);
-        frageTxt.setLayoutX(50);frageTxt.setLayoutY(50);
+        layout2Fragestellen.setPadding(new Insets(60,10,10,75));
+        layout2Fragestellen.getChildren().addAll( frageTxt,new HBox(input,leerzeichen,answerBtn),antwortPrueferHBox,home);
         frageTxt.setTextFill(Color.web("#F0FFF0"));
-        answerBtn.setLayoutX(295);answerBtn.setLayoutY(165);
-        input.setLayoutX(50);input.setLayoutY(165);
-        antwortPrueferHBox.setLayoutX(50);antwortPrueferHBox.setLayoutY(190);
         antwortPruefer.setTextFill(Color.web("#F0FFF0"));
 
-        Scene result1=new Scene(layout2Group,400,235);
+        Scene result1=new Scene(layout2StackP,500,350);
 
         return result1;
     }
@@ -230,6 +238,9 @@ public class LernApp extends Application  {
             multiChoiceRb.setToggleGroup(group);
             multiChoiceRb.setTextFill(Color.web("#F0FFF0"));
 
+            home = new Button("<-- zurück");
+            home.setOnAction(e-> { primaryStage.setScene(scene1);});
+
             bekommeKategorieBtn = new Button("add");
             bekommeKategorieBtn.setOnAction(e ->{
 
@@ -238,16 +249,21 @@ public class LernApp extends Application  {
 
 
         //layout AddCat
-            VBox layout3 =new VBox();
+            StackPane layout3StackP = new StackPane();
+            StackPane layout3border = new StackPane();
+            layout3StackP.getChildren().addAll(layout3border);
+            layout3border.setPadding(new Insets(20,20,20,20));
 
-            Group layout3Group = new Group();
-            layout3Group.getChildren().addAll(imageView2,layout3);
+            VBox layout3 =new VBox();
+            layout3border.getChildren().addAll(layout3);
+            layout3border.setBackground(new Background(myBG));
+            layout3.setBorder(new Border(new BorderStroke(Color.LIGHTBLUE, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(4))));
 
             layout3.setSpacing(10);
-            layout3.setPadding(new Insets(50,10,10,60));
-            layout3.getChildren().addAll(bekommeKategorieLbl,bekommeKategorieNameField, this.freieFrageRb,multiChoiceRb,bekommeKategorieBtn);
+            layout3.setPadding(new Insets(60,70,10,75));
+            layout3.getChildren().addAll(bekommeKategorieLbl,bekommeKategorieNameField, this.freieFrageRb,multiChoiceRb,bekommeKategorieBtn,home);
 
-            Scene result3=new Scene(layout3Group,400,235);
+            Scene result3=new Scene(layout3StackP,500,350);
 
             return result3;
     }
