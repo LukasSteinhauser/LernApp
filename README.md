@@ -1,9 +1,9 @@
 # LernApp
 Lern App als DHBW Projekt von Ghaith Dmirieh, Malek Grigho und Lukas Steinhauser
 
-###Anforderungen
+### Anforderungen
 
-######Must-Have:
+###### Must-Have:
 * Das Programm fragt, zu welchem Themengebiet Fragen gestellt werden (z.B. Englisch-Vokabeln, Geographie, IT-Wissen) oder ob zufällige Fragen aus allen vorhandenen Themengebieten beantwortet werden sollen.
 * Es wird gefragt, wie viele Fragen zu dem Thema (oder aus allen Themen) beantwortet werden sollen.
 * Für diese Anzahl werden aus dem Thema (oder aus allen Themen) zufällige Fragen gewählt.
@@ -14,12 +14,12 @@ Lern App als DHBW Projekt von Ghaith Dmirieh, Malek Grigho und Lukas Steinhauser
 * Zwei verschiedene Themen mit jeweils 10 Fragen sollten vordefiniert sein.
 * Verwaltungsmodus: Es können neue Themen, Fragen und Antworten eingegeben werden, die in Dateien abgespeichert werden.
 
-######Zusätzliche Must-Have Anforderungen, da dieses Projekt von 3 Personen durchgeführt wird:
+###### Zusätzliche Must-Have Anforderungen, da dieses Projekt von 3 Personen durchgeführt wird:
 * umfangreicher Verwaltungsmodus: Bearbeiten und Löschen von Themen, Fragen und Antworten.
 * Grafische Benutzeroberfläche (GUI) mit JavaFX
 * Zusätzliche Fragenart: Lückentext
 
-######Nice-To -Have:
+###### Nice-To -Have:
 * Das Programm speichert den Lernfortschritt/Statistiken ab und zeigt diese an
 * Statt der zufälligen Auswahl von Fragen werden die Fragen gestellt, die am häufigsten falsch beantwortet wurden
 * Benutzerkonzept mit Lernhistorie und Highscore 
