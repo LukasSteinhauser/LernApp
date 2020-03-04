@@ -10,6 +10,12 @@ public class Score {
     private String categoryName;
     private int questionIndex;
 
+    private Question question;
+
+    public Score(){
+
+    }
+
     public Score(LocalDate dateSignature, String categoryName, int questionIndex) {
         this.dateSignature = dateSignature;
         this.categoryName = categoryName;
@@ -23,12 +29,20 @@ public class Score {
         this.questionIndex = Integer.parseInt(split[2]);
     }
 
+    public String getQuestionName(){
+        return question.getFrage();
+    }
+
     public String getSignature(){
         return getSignature(dateSignature, categoryName, questionIndex);
     }
 
     public static String getSignature(LocalDate dateSignature, String categoryName, int questionIndex){
         return dateSignature.toString()+"|"+categoryName+"|"+questionIndex;
+    }
+
+    public int getTotalTries(){
+        return success+failure;
     }
 
     //region getter/setter
@@ -59,6 +73,10 @@ public class Score {
     public int getQuestionIndex() {
         return questionIndex;
     }
+
+    public Question getQuestion() {return question;}
+
+    public void setQuestion(Question question) {this.question = question;}
 
     //endregion
 }

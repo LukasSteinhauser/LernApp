@@ -1,8 +1,8 @@
 package data;
 
-import model.Category;
-import model.Question;
+import model.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,5 +42,27 @@ public class TestData {
 
         mappeAllerKategorien.add(java);
         return mappeAllerKategorien;
+    }
+
+    public static UserProfile getDefaultProfile() {
+        UserProfile profile = new UserProfile();
+
+        for(Category testCategory: getTestCategories()){
+
+            CategoryScore catScore = new CategoryScore();
+            profile.getScores().add(catScore);
+
+            catScore.setCategory(testCategory);
+
+            List<Score> scores = new ArrayList<>();
+
+            for(Question question : testCategory){
+                Score tempScore = new Score();
+                tempScore.setQuestion(question);
+                catScore.getScores().add(tempScore);
+            }
+        }
+
+        return profile;
     }
 }

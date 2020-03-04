@@ -13,9 +13,29 @@ public class UserProfile {
 
     private List<String> questionHistory = new ArrayList<>();
 
-    private Map<String, Score> scores = new HashMap<>();
+    private List<CategoryScore> scores = new ArrayList<>();
 
+    /**Für eine Frage Richtig/Falsch erhöhen
+     */
+    private boolean editStatistic(Category category, Question question, boolean correct){
+        var optionalCs = scores.stream().filter(tempCs->category.getName().equals(tempCs.getCategoryName())).findFirst();
+        if(optionalCs.isPresent()){
+            var cs = optionalCs.get();
 
+            var optionalScore = cs.getScores().stream().filter(tempScore->question.getFrage().equals(tempScore.getQuestionName())).findFirst();
+
+            if(optionalScore.isPresent()){
+                var score = optionalScore.get();
+                if(correct){
+                    score.setSuccess(score.getSuccess()+1);
+                }else{
+                    score.setFailure(score.getFailure()+1);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
     //region getter/setter
     public String getId() {
@@ -34,11 +54,11 @@ public class UserProfile {
         this.questionHistory = questionHistory;
     }
 
-    public Map<String, Score> getScores() {
+    public List<CategoryScore> getScores() {
         return scores;
     }
 
-    public void setScores(Map<String, Score> scores) {
+    public void setScores(List<CategoryScore> scores) {
         this.scores = scores;
     }
     //endregion

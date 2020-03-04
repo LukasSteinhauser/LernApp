@@ -237,81 +237,81 @@ public class TxtData {
         return list;
     }
 
-    public static void saveUserProfile(UserProfile profile){
-        String path = UserProfile.basicPath + profile.getId() + ".txt";
-        int historySize = 20;
-        List<String> history = profile.getQuestionHistory();
-
-        if(history.size()>historySize){
-            history = history.subList(history.size()-20,history.size());
-        }
-
-        try {
-            File file = new File(path);
-
-            file.getParentFile().mkdirs();
-
-            PrintWriter writer = new PrintWriter(file);
-
-            for (var historyEntry : history) {
-                writer.println(historyEntry);
-            }
-
-            writer.println();
-
-            for(var scoreEntry : profile.getScores().entrySet()){
-                var score = scoreEntry.getValue();
-                String writeString = scoreEntry.getKey() + ";" + score.getSuccess() + ";" + score.getFailure();
-                writer.println(writeString);
-            }
-
-            writer.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static UserProfile loadUserProfile(String profile){
-        UserProfile result = new UserProfile();
-
-        if(profile==null){
-            profile = UserProfile.defaultName;
-        }
-        String path = UserProfile.basicPath + profile+".txt";
-
-        File file = new File(path);
-        if(file.exists()){
-            try{
-
-                boolean historyMode = true;
-                BufferedReader reader = new BufferedReader(new FileReader(file));
-
-                var history = new ArrayList<String>();
-                var scores = new HashMap<String, Score>();
-
-                for (String line = reader.readLine(); line != null; line = reader.readLine()) {
-                    line = line.strip();
-                    if(line.isEmpty()){
-                        historyMode = false;
-                        continue;
-                    }
-                    if(historyMode){
-                        history.add(line);
-                    }else {
-                        String[] split = line.split(";");
-                        Score tempScore = new Score(split[0]);
-                        scores.put(tempScore.getSignature(),tempScore);
-                    }
-                }
-                result.setId(profile);
-                result.setQuestionHistory(history);
-                result.setScores(scores);
-
-            }catch (IOException ex){
-                ex.printStackTrace();
-            }
-        }
-
-        return result;
-    }
+//    public static void saveUserProfile(UserProfile profile){
+//        String path = UserProfile.basicPath + profile.getId() + ".txt";
+//        int historySize = 20;
+//        List<String> history = profile.getQuestionHistory();
+//
+//        if(history.size()>historySize){
+//            history = history.subList(history.size()-20,history.size());
+//        }
+//
+//        try {
+//            File file = new File(path);
+//
+//            file.getParentFile().mkdirs();
+//
+//            PrintWriter writer = new PrintWriter(file);
+//
+//            for (var historyEntry : history) {
+//                writer.println(historyEntry);
+//            }
+//
+//            writer.println();
+//
+//            for(var scoreEntry : profile.getScores().entrySet()){
+//                var score = scoreEntry.getValue();
+//                String writeString = scoreEntry.getKey() + ";" + score.getSuccess() + ";" + score.getFailure();
+//                writer.println(writeString);
+//            }
+//
+//            writer.close();
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//
+//    public static UserProfile loadUserProfile(String profile){
+//        UserProfile result = new UserProfile();
+//
+//        if(profile==null){
+//            profile = UserProfile.defaultName;
+//        }
+//        String path = UserProfile.basicPath + profile+".txt";
+//
+//        File file = new File(path);
+//        if(file.exists()){
+//            try{
+//
+//                boolean historyMode = true;
+//                BufferedReader reader = new BufferedReader(new FileReader(file));
+//
+//                var history = new ArrayList<String>();
+//                var scores = new HashMap<String, Score>();
+//
+//                for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+//                    line = line.strip();
+//                    if(line.isEmpty()){
+//                        historyMode = false;
+//                        continue;
+//                    }
+//                    if(historyMode){
+//                        history.add(line);
+//                    }else {
+//                        String[] split = line.split(";");
+//                        Score tempScore = new Score(split[0]);
+//                        scores.put(tempScore.getSignature(),tempScore);
+//                    }
+//                }
+//                result.setId(profile);
+//                result.setQuestionHistory(history);
+//                result.setScores(scores);
+//
+//            }catch (IOException ex){
+//                ex.printStackTrace();
+//            }
+//        }
+//
+//        return result;
+//    }
 }
