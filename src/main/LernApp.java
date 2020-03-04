@@ -27,12 +27,13 @@ public class LernApp extends Application  {
 
 
     TextField bekommeKategorieNameField;
-    Label bekommeKategorieLbl;
+    Label bekommeKategorieLbl,FragenAnzahl_Label,themaWählen;
     Button bekommeKategorieBtn,home;
 
     Label frageTxt,leerzeichen,antwortPruefer, willkommen;
     TextField input, fragenAnzahlField;
     Button answerBtn, goBtn,add,delete,edit;
+
 
     ArrayList<RadioButton> rdCategory ;
 
@@ -71,7 +72,7 @@ public class LernApp extends Application  {
 
     }
     public Scene hauptmenu(Stage primaryStage,List<Category> categoryData){
-
+        VBox layout1 =new VBox ();
 
         // layout1 Nds
         rdCategory = new ArrayList<>();
@@ -86,16 +87,29 @@ public class LernApp extends Application  {
             rb.setToggleGroup(group);
         }
 
+        fragenAnzahlField = new TextField();
+        fragenAnzahlField.setPromptText("wie viele Fragen sollen beantwortet werden ?");
+        fragenAnzahlField.setPrefColumnCount(20);
+
         goBtn = new Button("go");
         goBtn.setOnAction(e-> {
             Category selection = selectionFromRadioButtonGroup(group,categoryData, Category::getName);
             Collections.shuffle(selection);
-            scene2 = frageStellen(primaryStage, selection, 0);
-            primaryStage.setScene(scene2);
+            if (Integer.parseInt(fragenAnzahlField.getText()) <1 ||  Integer.parseInt(fragenAnzahlField.getText()) > selection.size() ){
+                primaryStage.setScene(scene1);
+                FragenAnzahl_Label.setText("Fragenanzahl soll zwischen 1 und"+selection.size());
+                FragenAnzahl_Label.setTextFill(Color.web("#2EFE2E"));
+
+            }
+            else {
+                scene2 = frageStellen(primaryStage, selection, 0);
+                primaryStage.setScene(scene2);
+            }
         });
 
         add = new Button("Add");
         add.setOnAction(e-> { primaryStage.setScene(scene3);});
+
 
         delete = new Button("Delete");
         edit = new Button("Edit");
@@ -103,21 +117,26 @@ public class LernApp extends Application  {
         leerzeichen = new Label();
         leerzeichen.setText("  ");
 
+        FragenAnzahl_Label = new Label("wie viele Fragen sollen beantwortet werden ?");
+        FragenAnzahl_Label.setTextFill(Color.web("#F0FFF0"));
+        FragenAnzahl_Label.setFont(Font.font("Arial",15));
+
+        themaWählen= new Label();
+        themaWählen.setText("Wählen Sie ein Thema");
+        themaWählen.setTextFill(Color.web("#F0FFF0"));
+        themaWählen.setFont(Font.font("Arial",15));
+
         willkommen = new Label();
         willkommen.setText("Willkommen");
         willkommen.setTextFill(Color.web("#F0FFF0"));
         willkommen.setFont(Font.font("Arial",30));
 
-        fragenAnzahlField = new TextField();
-        fragenAnzahlField.setPromptText("wie viele Fragen sollen beantwortet werden ?");
-        fragenAnzahlField.setPrefColumnCount(20);
 
         //layout1
 
 
         StackPane layout1StackP = new StackPane();
         StackPane layout1border = new StackPane();
-        VBox layout1 =new VBox ();
         layout1border.getChildren().addAll(layout1);
         layout1StackP.getChildren().addAll(layout1border);
         layout1border.setPadding(new Insets(20,20,20,20));
@@ -136,7 +155,9 @@ public class LernApp extends Application  {
         layout1.setPadding(new Insets(60,10,10,75));
         layout1.getChildren().addAll(new StackPane(willkommen));
         layout1.getChildren().addAll(new StackPane(toolBar));
+        layout1.getChildren().addAll(themaWählen);
         layout1.getChildren().addAll(rdVBox );
+        layout1.getChildren().addAll(FragenAnzahl_Label);
         layout1.getChildren().addAll(new HBox(fragenAnzahlField,leerzeichen, goBtn));
         Scene result=new Scene(layout1StackP,500,350);
 
@@ -181,8 +202,11 @@ public class LernApp extends Application  {
                 answerBtn.setText("Next");
                 antwortPrueferHBox.getChildren().addAll(falseView,antwortPruefer);
             }
+
             answerBtn.setOnAction(a->{
-                if (indexOfQuestion + 1 == currentCategory.size()){
+                int fragenAnzahl = Integer.parseInt(fragenAnzahlField.getText());
+
+                if (indexOfQuestion + 1 == fragenAnzahl ){
                     primaryStage.setScene(scene1);
                     answerBtn.setText("Hauptmenu");}
                 else {
