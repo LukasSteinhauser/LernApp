@@ -20,10 +20,7 @@ import model.Category;
 import model.Question;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 
 public class LernApp extends Application  {
@@ -92,6 +89,7 @@ public class LernApp extends Application  {
         goBtn = new Button("go");
         goBtn.setOnAction(e-> {
             Category selection = selectionFromRadioButtonGroup(group,categoryData, Category::getName);
+            Collections.shuffle(selection);
             scene2 = frageStellen(primaryStage, selection, 0);
             primaryStage.setScene(scene2);
         });
@@ -184,9 +182,13 @@ public class LernApp extends Application  {
                 antwortPrueferHBox.getChildren().addAll(falseView,antwortPruefer);
             }
             answerBtn.setOnAction(a->{
-                Scene nextSene = frageStellen(primaryStage, currentCategory,indexOfQuestion+1);
-                primaryStage.setScene(nextSene);
-            });
+                if (indexOfQuestion + 1 == currentCategory.size()){
+                    primaryStage.setScene(scene1);
+                    answerBtn.setText("Hauptmenu");}
+                else {
+                    Scene nextSene = frageStellen(primaryStage, currentCategory, indexOfQuestion + 1);
+                    primaryStage.setScene(nextSene);
+                }});
 
         });
 
