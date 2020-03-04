@@ -1,6 +1,6 @@
 package data;
 
-import com.google.gson.Gson;
+import com.goolge.gson.Gson;
 import model.UserProfile;
 import org.apache.commons.io.FileUtils;
 
