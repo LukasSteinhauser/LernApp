@@ -2,7 +2,6 @@ package data;
 
 import model.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,15 +48,15 @@ public class TestData {
 
         for(Category testCategory: getTestCategories()){
 
-            CategoryScore catScore = new CategoryScore();
+            ThemaStatistik catScore = new ThemaStatistik();
             profile.getScores().add(catScore);
 
             catScore.setCategory(testCategory);
 
-            List<Score> scores = new ArrayList<>();
+            List<FrageStatistik> scores = new ArrayList<>();
 
             for(Question question : testCategory){
-                Score tempScore = new Score();
+                FrageStatistik tempScore = new FrageStatistik();
                 tempScore.setQuestion(question);
                 catScore.getScores().add(tempScore);
             }

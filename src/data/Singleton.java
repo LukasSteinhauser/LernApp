@@ -1,5 +1,6 @@
 package data;
 
+import model.Category;
 import model.UserProfile;
 
 import java.util.List;
@@ -28,5 +29,14 @@ public class Singleton {
             currentProfile = JsonData.getUserProfile(null);
         }
         return currentProfile;
+    }
+
+    private List<Category> kategorien;
+
+    public List<Category> getKategorien(){
+        if(kategorien == null){
+            kategorien = TxtData.initCategories();
+        }
+        return kategorien;
     }
 }

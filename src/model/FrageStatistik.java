@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Score {
+public class FrageStatistik {
     private int success = 0;
     private int failure = 0;
 
@@ -12,17 +12,17 @@ public class Score {
 
     private Question question;
 
-    public Score(){
+    public FrageStatistik(){
 
     }
 
-    public Score(LocalDate dateSignature, String categoryName, int questionIndex) {
+    public FrageStatistik(LocalDate dateSignature, String categoryName, int questionIndex) {
         this.dateSignature = dateSignature;
         this.categoryName = categoryName;
         this.questionIndex = questionIndex;
     }
 
-    public Score(String signature){
+    public FrageStatistik(String signature){
         String[] split = signature.split("|");
         this.dateSignature = LocalDate.parse(split[0]);
         this.categoryName = split[1];

@@ -1,9 +1,7 @@
 package view;
 
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SceneAntialiasing;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
@@ -11,27 +9,26 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import model.CategoryScore;
-import model.Score;
+import javafx.stage.Stage;
+import model.ThemaStatistik;
+import model.FrageStatistik;
 import model.UserProfile;
 
-public class ScoreScene {
+public class StatistikScene {
 
     private UserProfile profile;
 
-    private ScoreScene() {
+    private StatistikScene() {
     }
 
-
-    public static Scene newInstance(UserProfile profile) {
+    public static Scene newInstance(UserProfile profile, Stage primaryStage) {
         Pane mainPanel = init(profile);
         return new Scene(new ScrollPane(mainPanel),500,350);
     }
 
-    public static Scene newInstance(UserProfile profile, double width, double height) {
+    public static Scene newInstance(UserProfile profile, double width, double height, Stage primaryStage) {
         Pane mainPanel = init(profile);
         return new Scene(mainPanel, width, height);
     }
@@ -40,16 +37,16 @@ public class ScoreScene {
 
         VBox result = new VBox();
         result.setSpacing(5);
-        for(CategoryScore cs : profile.getScores()){
+        for(ThemaStatistik cs : profile.getScores()){
             result.getChildren().add(newCategoryScoreDisplay(cs));
         }
 
         return result;
     }
 
-    private static Node newCategoryScoreDisplay(CategoryScore categoryScore) {
+    private static Node newCategoryScoreDisplay(ThemaStatistik themaStatistik) {
         TitledPane result = new TitledPane();
-        result.setText(categoryScore.getCategoryName());
+        result.setText(themaStatistik.getCategoryName());
         GridPane grid = new GridPane();
         result.setContent(grid);
 
@@ -64,9 +61,9 @@ public class ScoreScene {
         grid.add(wrongHeader,2,0);
 
 
-        var scoreList = categoryScore.getScores();
+        var scoreList = themaStatistik.getScores();
         for (int i = 0;i<scoreList.size();++i) {
-            Score score = scoreList.get(i);
+            FrageStatistik score = scoreList.get(i);
 
             Label questionLbl = new Label(score.getQuestionName());
             questionLbl.setWrapText(true);

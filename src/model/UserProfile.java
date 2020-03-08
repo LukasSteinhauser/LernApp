@@ -13,7 +13,7 @@ public class UserProfile {
 
     private List<String> questionHistory = new ArrayList<>();
 
-    private List<CategoryScore> scores = new ArrayList<>();
+    private List<ThemaStatistik> scores = new ArrayList<>();
 
     /**Für eine Frage Richtig/Falsch erhöhen
      */
@@ -54,11 +54,11 @@ public class UserProfile {
         this.questionHistory = questionHistory;
     }
 
-    public List<CategoryScore> getScores() {
+    public List<ThemaStatistik> getScores() {
         return scores;
     }
 
-    public void setScores(List<CategoryScore> scores) {
+    public void setScores(List<ThemaStatistik> scores) {
         this.scores = scores;
     }
     //endregion

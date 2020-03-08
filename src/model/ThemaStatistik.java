@@ -6,15 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CategoryScore {
+public class ThemaStatistik {
 
-    private Map<Integer, Score> map = new HashMap<>();
+    private Map<Integer, FrageStatistik> map = new HashMap<>();
 
     private Category category;
 
     private LocalDate lastEdited;
 
-    private List<Score> scores = new ArrayList<>();
+    private List<FrageStatistik> scores = new ArrayList<>();
 
     public String getCategoryName(){
         return category.getName();
@@ -37,11 +37,11 @@ public class CategoryScore {
         this.lastEdited = lastEdited;
     }
 
-    public void setScores(List<Score> scores) {
+    public void setScores(List<FrageStatistik> scores) {
         this.scores = scores;
     }
 
-    public List<Score> getScores(){
+    public List<FrageStatistik> getScores(){
         return scores;
     }
     //endregion

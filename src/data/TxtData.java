@@ -3,12 +3,8 @@ package data;
 import main.Scan;
 import model.Category;
 import model.Question;
-import model.Score;
-import model.UserProfile;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.security.cert.CollectionCertStoreParameters;
 import java.util.*;
 import java.util.stream.Collectors;
 
