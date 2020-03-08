@@ -72,12 +72,12 @@ public class HauptmenuScene {
         });
 
         Button add = new Button("Add");
-        //TODO
-//        add.setOnAction(e-> { primaryStage.setScene(ThemaBearbeitenScene.newInstance(NodeUtil.selectionFromRadioButtonGroup(group,richtigeKategorien,Category::getName),primaryStage));});
+        add.setOnAction(e-> { primaryStage.setScene(ThemaBearbeitenScene.newInstance(null,primaryStage));});
 
 
         Button delete = new Button("Delete");
         Button edit = new Button("Edit");
+        edit.setOnAction(e-> { primaryStage.setScene(ThemaBearbeitenScene.newInstance(NodeUtil.selectionFromRadioButtonGroup(group,richtigeKategorien,Category::getName),primaryStage));});
 
 
 

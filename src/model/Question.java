@@ -33,6 +33,9 @@ public class Question {
     }
 
     public String getFrage() {
+        if(frage == null){
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         for (String str:frage) {
             sb.append(str).append(System.lineSeparator());
