@@ -4,14 +4,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.Category;
+import model.Thema;
 import model.Question;
-import model.UserProfile;
 import util.ImageUtil;
 import util.NodeUtil;
 
@@ -22,12 +20,12 @@ public class QuizScene {
     private QuizScene() {
     }
 
-    public static Scene newInstance(Stage primaryStage, IntSupplier fragenAnzahlSupplier, Category currentCategory, int indexOfQuestion) {
-        return frageStellen(primaryStage, fragenAnzahlSupplier, currentCategory, indexOfQuestion);
+    public static Scene newInstance(Stage primaryStage, IntSupplier fragenAnzahlSupplier, Thema currentThema, int indexOfQuestion) {
+        return frageStellen(primaryStage, fragenAnzahlSupplier, currentThema, indexOfQuestion);
     }
 
-    public static Scene frageStellen(Stage primaryStage, IntSupplier fragenAnzahlSupplier, Category currentCategory, int indexOfQuestion){
-        Question question = currentCategory.get(indexOfQuestion);
+    public static Scene frageStellen(Stage primaryStage, IntSupplier fragenAnzahlSupplier, Thema currentThema, int indexOfQuestion){
+        Question question = currentThema.get(indexOfQuestion);
 
         StackPane layout2StackP = new StackPane();
         StackPane layout2border = new StackPane();
@@ -73,15 +71,16 @@ public class QuizScene {
                     primaryStage.setScene(HauptmenuScene.newInstance(primaryStage,null));
                     answerBtn.setText("Hauptmenu");}
                 else {
-                    Scene nextSene = frageStellen(primaryStage, fragenAnzahlSupplier, currentCategory, indexOfQuestion + 1);
+                    Scene nextSene = frageStellen(primaryStage, fragenAnzahlSupplier, currentThema, indexOfQuestion + 1);
                     primaryStage.setScene(nextSene);
                 }});
 
         });
 
         Button home = new Button("<-- zurück");
-        home.setOnAction(e->primaryStage.setScene(HauptmenuScene.newInstance(primaryStage, null)));
-
+        home.setOnAction(e->{
+            primaryStage.setScene(HauptmenuScene.newInstance(primaryStage, null));
+        });
 
         //layout2
         layout2border.setBackground(new Background(ImageUtil.MY_BG));
@@ -91,18 +90,8 @@ public class QuizScene {
         frageTxt.setTextFill(Color.web("#F0FFF0"));
         antwortPruefer.setTextFill(Color.web("#F0FFF0"));
 
-        Scene result1=new Scene(layout2StackP,500,350);
+        Scene result1=new Scene(layout2StackP,1000,700);
 
         return result1;
     }
-
-//    public static Scene newInstance(UserProfile profile, Stage mainStage) {
-//        Pane mainPanel = init(profile);
-//        return new Scene(new ScrollPane(mainPanel),500,350);
-//    }
-//
-//    public static Scene newInstance(UserProfile profile, double width, double height, Stage mainStage) {
-//        Pane mainPanel = init(profile);
-//        return new Scene(mainPanel, width, height);
-//    }
 }

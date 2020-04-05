@@ -2,7 +2,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Category extends ArrayList<Question> {
+public class Thema extends ArrayList<Question> {
     private String name ;
 
 
@@ -15,9 +15,9 @@ public class Category extends ArrayList<Question> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Category)) return false;
+        if (!(o instanceof Thema)) return false;
         if (!super.equals(o)) return false;
-        Category questions = (Category) o;
+        Thema questions = (Thema) o;
         return Objects.equals(getName(), questions.getName());
     }
 

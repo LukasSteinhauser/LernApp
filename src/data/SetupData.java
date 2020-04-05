@@ -5,11 +5,11 @@ import model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestData {
+public class SetupData {
 
-    public static List<Category> getTestCategories(){
-        //Kategorie 1
-        Category hauptstaedte = new Category();
+    public static List<Thema> getTestCategories(){
+        //Thema 1
+        Thema hauptstaedte = new Thema();
         hauptstaedte.setName("Hauptstädte");
         hauptstaedte.add(new Question("Berlin", "Wie heißt die Hauptstadt von Deutschland?"));
         hauptstaedte.add(new Question("Amsterdam","Wie heißt die Hauptstadt von den Niederlanden?"));
@@ -22,11 +22,11 @@ public class TestData {
         hauptstaedte.add(new Question("Moskau", "Wie heißt die Hauptstadt von Russland?"));
         hauptstaedte.add(new Question("London","Wie heißt die Hauptstadt von Großbritannien?"));
 
-        var mappeAllerKategorien = new ArrayList<Category>();
+        var mappeAllerKategorien = new ArrayList<Thema>();
         mappeAllerKategorien.add(hauptstaedte);
 
-        //Kategorie 2
-        Category java = new Category();
+        //Thema 2
+        Thema java = new Thema();
         java.setName("Java");
         java.add(new Question("1","Which of the below is valid way to instantiate an array in java?", "1:int myArray [] = {1, 3, 5};", "2:int myArray [] [] = {1,2,3,4};", "3:int [] myArray = {\"1\", \"2\", \"3\"};"));
         java.add(new Question("1","Which of the following statements is true?","1:Java has a huge devoloper community", "2:Java is used only in NASA's space related applications ", "3:Java is used only in web and mobile applications" ));
@@ -41,27 +41,5 @@ public class TestData {
 
         mappeAllerKategorien.add(java);
         return mappeAllerKategorien;
-    }
-
-    public static UserProfile getDefaultProfile() {
-        UserProfile profile = new UserProfile();
-
-        for(Category testCategory: getTestCategories()){
-
-            ThemaStatistik catScore = new ThemaStatistik();
-            profile.getScores().add(catScore);
-
-            catScore.setCategory(testCategory);
-
-            List<FrageStatistik> scores = new ArrayList<>();
-
-            for(Question question : testCategory){
-                FrageStatistik tempScore = new FrageStatistik();
-                tempScore.setQuestion(question);
-                catScore.getScores().add(tempScore);
-            }
-        }
-
-        return profile;
     }
 }
